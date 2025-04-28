@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ company_name }} Presentation</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: white;
+    }
+    .slide {
+      page-break-after: always;
+      height: 100%;
+      width: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1, h2, h3, h4 {
+      margin-bottom: 20px;
+      color: #007BFF;
+      text-align: center;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    ul, ol {
+      text-align: left;
+      font-size: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+      width: 100%;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .flex-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+    }
+    .flex-section img, .flex-section p {
+      flex: 1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    .two-column {
+      display: flex;
+      width: 100%;
+      gap: 40px;
+    }
+    .column {
+      flex: 1;
+    }
+    .small-table {
+      margin-top: 10px;
+    }
+    .content-block {
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide" style="background-color: #e0f7fa;">
+  <h1>{{ company_name }}</h1>
+  <h2>{{ details }}</h2>
+</div>
+
+<!-- Slide 2: Table of Contents -->
+<div class="slide">
+  <h1>Table of Contents</h1>
+  <ol>
+    {% for item in toc %}
+      <li><h3>{{ item }}</h3></li>
+    {% endfor %}
+  </ol>
+</div>
+
+<!-- Slide 3: Gallery Grid -->
+<div class="slide">
+  <h1>Gallery</h1>
+  <div class="grid">
+    {% for img in gallery_images %}
+      <div class="content-block">
+        <img src="{{ img }}" alt="Gallery Image">
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Slide 4: Image + Text Side by Side -->
+<div class="slide">
+  <h1>About Us</h1>
+  <div class="flex-section">
+    <img src="{{ section_image }}" alt="Section Image">
+    <p>{{ section_text }}</p>
+  </div>
+</div>
+
+<!-- Slide 5: Two Columns (Quick Links + ISIC + Tables) -->
+<div class="slide">
+  <h1>Information Overview</h1>
+  <div class="two-column">
+    <div class="column">
+      <div class="content-block">
+        <h2>Quick Links</h2>
+        <ul>
+          {% for link in quick_links %}
+            <li>{{ link }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="content-block">
+        <h2>ISIC Codes</h2>
+        <table class="small-table">
+          {% for code, description in isic_codes %}
+            <tr>
+              <td>{{ code }}</td>
+              <td>{{ description }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="content-block">
+        <h2>Products</h2>
+        <table>
+          {% for row in table1 %}
+            <tr>
+              {% for cell in row %}
+                <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="content-block">
+        <h2>Employees</h2>
+        <table>
+          {% for row in table2 %}
+            <tr>
+              {% for cell in row %}
+                <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Full Paragraph Slide -->
+<div class="slide" style="background-color: #f0f4c3;">
+  <h1>Our Mission</h1>
+  <p>
+    We are committed to pushing the boundaries of innovation and providing world-class service.
+    Every step we take is fueled by our passion to make a difference and leave a positive impact
+    in everything we do. Our team believes in the power of collaboration, excellence, and integrity.
+  </p>
+</div>
+
+<!-- Slide 7: Link Collection Slide -->
+<div class="slide">
+  <h1>Useful Resources</h1>
+  <ul>
+    <li><a href="https://example.com" target="_blank">Company Website</a></li>
+    <li><a href="https://example.com/about" target="_blank">About Us</a></li>
+    <li><a href="https://example.com/services" target="_blank">Services</a></li>
+    <li><a href="https://example.com/contact" target="_blank">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Slide 8: Split-Screen Table Slide -->
+<div class="slide">
+  <h1>Financial Overview</h1>
+  <div class="two-column">
+    <div class="column">
+      <h2>Revenue 2024</h2>
+      <table>
+        <tr><th>Quarter</th><th>Amount</th></tr>
+        <tr><td>Q1</td><td>$500k</td></tr>
+        <tr><td>Q2</td><td>$650k</td></tr>
+        <tr><td>Q3</td><td>$700k</td></tr>
+        <tr><td>Q4</td><td>$800k</td></tr>
+      </table>
+    </div>
+    <div class="column">
+      <h2>Expenses 2024</h2>
+      <table>
+        <tr><th>Quarter</th><th>Amount</th></tr>
+        <tr><td>Q1</td><td>$200k</td></tr>
+        <tr><td>Q2</td><td>$250k</td></tr>
+        <tr><td>Q3</td><td>$300k</td></tr>
+        <tr><td>Q4</td><td>$350k</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Mixed Content Slide -->
+<div class="slide" style="background-color: #ffe0b2;">
+  <h1>Highlights</h1>
+  <div class="grid">
+    <div class="content-block">
+      <h3>Innovation</h3>
+      <p>We lead with ideas that transform industries.</p>
+    </div>
+    <div class="content-block">
+      <h3>Growth</h3>
+      <p>Expanding rapidly across multiple markets worldwide.</p>
+    </div>
+    <div class="content-block">
+      <h3>Community</h3>
+      <p>We invest back into the communities we serve.</p>
+    </div>
+    <div class="content-block">
+      <img src="{{ gallery_images[0] }}" alt="Highlight Image">
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
